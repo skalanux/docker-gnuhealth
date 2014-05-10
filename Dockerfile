@@ -1,6 +1,6 @@
 #from wiltan/debian-tiny
 from ubuntu:latest
-add https://github.com/Billynkid/docker-gnuhealth/blob/master/requires /tmp/
+add requires /tmp/
 run apt-get update 
 run apt-get -y install python-setuptools python-dev libldap2-dev libsasl2-dev git
 run easy_install pip
