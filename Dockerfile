@@ -1,8 +1,8 @@
 #from wiltan/debian-tiny
 from ubuntu:latest
-add requires.txt /tmp/
+add https://github.com/Billynkid/docker-gnuhealth/blob/master/requires /tmp/
 run apt-get update 
-run apt-get -y --force-yes install python-setuptools python-dev libldap2-dev libsasl2-dev 
+run apt-get -y --force-yes install python-setuptools python-dev libldap2-dev libsasl2-dev git
 run easy_install pip
 run pip install hgnested
 run mkdir -p /etc/mercurial/
