@@ -1,0 +1,14 @@
+Genshi
+PyWebDAV
+python-ldap
+cdecimal
+lxml
+polib
+psycopg2
+python-dateutil
+pytz
+relatorio
+six
+proteus
+vatnumber
+vobject
