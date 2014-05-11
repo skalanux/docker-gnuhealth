@@ -2,16 +2,29 @@
 from ubuntu:latest
 add requires /tmp/
 run apt-get update 
-run apt-get -y install python-setuptools python-dev libldap2-dev libsasl2-dev git
+run apt-get -y install python-setuptools python-dev libldap2-dev libsasl2-dev git libsasl2-dev libssl-dev python-ldap python-psycopg2 libxml2-dev libxslt1-dev wget libpq-dev postgresql supervisor
 run easy_install pip
 run pip install hgnested
 run mkdir -p /etc/mercurial/
 run echo "[extensions]\nhgnested =" > /etc/mercurial/hgrc
-run hg clone http://hg.savannah.gnu.org/hgweb/health/ /opt/gnuhealth/
-run pip install -r /tmp/requires
+run mkdir /tmp/gnuhealth
+run hg clone http://hg.savannah.gnu.org/hgweb/health/ /tmp/gnuhealth/
+run useradd -m -d /opt/gnuhealth gnuhealth
+USER gnuhealth
+ENV HOME /opt/gnuhealth
+workdir /tmp/gnuhealth/tryton
+run ./gnuhealth_install.sh
+#run pip install -r /tmp/requires
 # tryton end
-run sed -i s/localhost:8000/0.0.0.0:8000/g /opt/gnuhealth/etc/trytond.conf
+#run source $HOME/.gnuhealthrc
+workdir /opt/gnuheealth/gnuhealth/tryton/server/trytond-3.0.4/etc
+run sed -i s/localhost:8000/0.0.0.0:8000/g $HOME/gnuhealth/tryton/server/trytond-*/etc/trytond.conf
+USER root
 run rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
 add run_postgresql.sh /usr/local/bin/
+run chmod +x /usr/local/bin/run_postgresql.sh
 add supervisor/	/etc/supervisor/conf.d/
+ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 expose 8000
+CMD ["/usr/bin/supervisord"]
+
