@@ -17,7 +17,7 @@ run ./gnuhealth_install.sh
 #run pip install -r /tmp/requires
 # tryton end
 #run source $HOME/.gnuhealthrc
-workdir /opt/gnuheealth/gnuhealth/tryton/server/trytond-3.0.4/etc
+workdir /opt/gnuhealth/gnuhealth/tryton/server/trytond-3.0.4/etc
 run sed -i s/localhost:8000/0.0.0.0:8000/g $HOME/gnuhealth/tryton/server/trytond-*/etc/trytond.conf
 USER root
 run rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
