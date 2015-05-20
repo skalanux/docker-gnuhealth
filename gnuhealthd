@@ -1,0 +1,3 @@
+#!/bin/bash
+export PYTHONPATH=$(echo /opt/gnuhealth/gnuhealth/tryton/server/trytond-3.2.*)
+/usr/local/bin/trytond --config=/etc/trytond.conf

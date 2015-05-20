@@ -19,7 +19,7 @@ run useradd -m -d /opt/gnuhealth gnuhealth
 USER gnuhealth
 ENV HOME /opt/gnuhealth
 
-USER root
+#USER root
 run ./gnuhealth_install.sh
 #run pip install -r /tmp/requires
 # tryton end
@@ -37,6 +37,8 @@ USER root
 run service postgresql stop
 add supervisor/	/etc/supervisor/conf.d/
 add trytond.conf /etc/trytond.conf
+ADD gnuhealthd /usr/local/bin/gnuhealthd
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+RUN ln -s /opt/gnuhealth/gnuhealth/tryton/server/trytond-3.*/bin/trytond /usr/local/bin/
 expose 8000
 CMD ["/usr/bin/supervisord"]
